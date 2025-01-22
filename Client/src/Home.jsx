@@ -5,11 +5,14 @@ import { BsFacebook } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaChartPie } from "react-icons/fa"; 
 import { FaLightbulb } from "react-icons/fa"; 
-import { MdOutlineCenterFocusStrong } from "react-icons/md"; 
+import { MdOutlineCenterFocusStrong } from "react-icons/md";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import React , {useState , useEffect} from 'react';
 
 function Home() {
+
 
 
 
@@ -41,11 +44,18 @@ function Home() {
             ]
     ]
 
+    useEffect(() => {
+        AOS.init({
+            duration: 400, // Animation duration in milliseconds
+            once: true,     // Whether animation should happen only once
+        });
+    }, []);
+
 
 
     return (
     <>
-        <nav className=' flex items-center justify-between px-32 flex-row h-20'>
+        {/* <nav className=' flex items-center justify-between px-32 flex-row h-20'>
             <div className=' flex items-center justify-between w-11/12'>
                 <h1 className='text-4xl font-bold text-navy cursor-pointer'>BrainsMath</h1>
                 <div className='flex items-center justify-center gap-5'>
@@ -54,8 +64,8 @@ function Home() {
                 </div>
             </div>
             <div className='cursor-pointer bg-navy text-xl ml-16 rounded-2xl px-4 py-2 text-white font-medium hover:bg-black transition-all'>Login</div>
-        </nav>
-        <section className=' flex items-center justify-center flex-col p'>
+        </nav> */}
+        <section className=' flex items-center justify-center flex-col p' data-aos="fade-up">
             <div className=' flex items-center justify-center flex-col'>
                 <h1 className='text-navy text-[9rem] text-wrap font-bold font-Mono'>Learn</h1>
                 <h1 className='text-navy text-[9rem] text-wrap font-bold font-Mono'>Mental Math</h1>
@@ -82,9 +92,9 @@ function Home() {
         </section>
         <section className="pt-10 flex items-center justify-center flex-col">
             <h1 className="text-navy text-7xl font-bold ">What Will You Learn?</h1>
-            <div className="flex items-center justify-center">
-                <img src="../public/Brain3.png" alt="" className="w-1/3 -ml-96 mr-20"/>
-                <div>
+            <div className="flex items- justify-center mt-20">
+                <div className="w-1/3  mr-20"><img src="../public/Brain3.png" alt="" className=""/></div>
+                <div className="w-2/3">
                     <div className="flex items-center justify-around text-xl text-white bg-lightNavy mb-10 rounded-full py-5">
                         <h1 className={`${operation === 0 ? "bg-navy" : ""} rounded-full px-5 py-3 transition-all hover:bg-black cursor-pointer`} onClick={e => setOperation(0)}>Addition</h1>
                         <h1 className={`${operation === 1 ? "bg-navy" : ""} rounded-full px-5 py-3 transition-all hover:bg-black cursor-pointer`} onClick={e => setOperation(1)}>Subtraction</h1>
@@ -92,11 +102,11 @@ function Home() {
                         <h1 className={`${operation === 3 ? "bg-navy" : ""} rounded-full px-5 py-3 transition-all hover:bg-black cursor-pointer`} onClick={e => setOperation(3)}>Squares</h1>
                         <h1 className={`${operation === 4 ? "bg-navy" : ""} rounded-full px-5 py-3 transition-all hover:bg-black cursor-pointer`} onClick={e => setOperation(4)}>Roots</h1>
                     </div>
-                    <div className="bg-slate-100 p-5 rounded-3xl size-full">
+                    <div className="bg-slate-100 p-5 rounded-3xl max-w-1/2">
                         {
                             WhatWillYouLearn[operation].map((item) => {
                                 return(
-                                    <div className="flex items-center justify-center my-3 font-medium">{item}</div>
+                                    <div className="flex items-center justify-center my-3 font-medium text-wrap">{item}</div>
                                 )
                             })
                         }
