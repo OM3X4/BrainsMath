@@ -1,40 +1,67 @@
 /* eslint-disable */
 import React , { useState , useEffect} from 'react';
 import { Data } from './assets/Collary';
+import { useNavigate , useLocation , useSearchParams } from 'react-router';
+
+
 
 function Practice() {
 
-    const [lesson , setLesson] = useState(Data["2"]);
+
+    const [currentLessonIndex , setCurrentLessonIndex] = useState(null)
+    const [lesson , setLesson] = useState(null);
     const [currentContent , setCurrentContent] = useState(0);
     const [isWrongAnswer , setIsWrongAnswer] = useState(false);
     const [progress , setProgress] = useState(0);
+    const [isCorrectAnswer , setIsCorrectAnswer] = useState(false)
     
     const [startTime , setStartTime] = useState(performance.now())
     const [collectedData , setCollectedDate] = useState([])
 
+    const navigate = useNavigate();
+    const [search] = useSearchParams()
 
+    //no touch
+    useEffect(() => {
+        setCurrentLessonIndex(parseInt(search.get("index")))
+        setLesson(Data[parseInt(search.get("index"))])
+    } , [])
+
+
+    // no touch
     useEffect(() => {
         setStartTime(performance.now())
     } , [currentContent])
 
-
+    //no touch
     useEffect(() => {
-        console.log(collectedData)
-    } , [collectedData])
-    
+        setLesson(Data[currentLessonIndex])
+        setCurrentContent(0)
+        setProgress(0)
+    } , [currentLessonIndex])
 
+
+    
 
     function handleClick(choice , answer){
         if(answer == choice){
             if(lesson.content.length - 1 > currentContent){
                 const endTime = performance.now()
-                setCollectedDate(prev => [...prev , {question:lesson.content[currentContent] , takenTime:(endTime - startTime)}])
+                setCollectedDate(prev => [...prev , {question:lesson.content[currentContent] , takenTime:(endTime - startTime) , date:new Date(Date.now())}])
                 setProgress(c => c + ((1/lesson.content.length) * 100))
+                setIsCorrectAnswer(true)
                 setTimeout(() => {
+                    setIsCorrectAnswer(false)
                     setCurrentContent(c => c + 1)
-                } , 1500)
+                } , 1000)
             }else{
-                //transition
+                if(Data.length > currentLessonIndex + 1){
+                    if(Data[currentLessonIndex + 1].type == "practice"){
+                        setCurrentLessonIndex(prev => prev + 1);
+                    }else{
+                        navigate(`/lesson?index=${currentLessonIndex + 1}`)
+                    }
+                }
             }
         }else if(currentContent < lesson.content.length - 1){
             const temp = lesson.content[currentContent];
@@ -55,10 +82,16 @@ function Practice() {
                     type: "practice",
                     content: updatedContent
                 }));
-            } , 1500)
+            } , 500)
 
         }else{
-            //transition
+            if(Data.length > currentLessonIndex + 1){
+                if(Data[currentLessonIndex + 1].type == "practice"){
+                    navigate("/lessonfinisher" , { state: { link: `/practice?index=${currentLessonIndex + 1}`} })
+                }else{
+                    navigate("/lessonfinisher" , { state: { link: `/lesson?index=${currentLessonIndex + 1}`} })
+                }
+            }
         }
     }
     
@@ -66,7 +99,7 @@ function Practice() {
 
     return (
     <>
-        <div className={`flex items-center justify-center h-[calc(80vh-5rem)]`}>
+        {lesson ? <div className={`flex items-center justify-center h-[calc(80vh-5rem)]`}>
             <div className="w-6/12 bg-slate-400 rounded-full h-4 dark:bg-gray-700 absolute top-20">
                 <div className="bg-green h-4 rounded-full transition-all" style={{width: `${progress}%`}}></div>
             </div>
@@ -95,6 +128,7 @@ function Practice() {
                 </div>
             </div>
         </div>
+        :""}
         {isWrongAnswer?
         <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">            <div className='flex items-center justify-center'>
                 <svg className="flex-shrink-0 inline w-7 h-7 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -109,6 +143,19 @@ function Practice() {
                 Next
             </div>
         </div>: ""}
+        {isCorrectAnswer?
+        <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-emerald-600  border border-emerald-300 rounded-lg" role="alert">            
+            <div className='flex items-center justify-center'>
+                <svg className="flex-shrink-0 inline w-7 h-7 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span className="sr-only">Info</span>
+                <div>
+                    <span className="font-medium text-2xl">Correct Answer!</span>
+                </div>
+            </div>
+        </div>:
+        ""}
     </>
     );
 }

@@ -10,6 +10,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import React , {useState , useEffect} from 'react';
+import { Link } from "react-router";
+
 
 function Home() {
 
@@ -71,7 +73,7 @@ function Home() {
                 <h1 className='text-navy text-[9rem] text-wrap font-bold font-Mono'>Mental Math</h1>
             </div>
             <p className=' text-xl text-gray'>Speed, Accuracy, and Confidence in Every Calculation!</p>
-            <div className=' mt-10 bg-navy py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'>Get Started</div>
+            <Link to={"/lesson?index=0"}><div className=' mt-10 bg-navy py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'>Get Started</div></Link>
         </section>
         <section className=" bg-[url('../public/GeometricLightNavy.png')] bg-navy pb-10 bg-contain brightness-90 mt-20 flex items-center justify-center flex-col pt-10">
             <h1 className="font-Mono text-6xl text-white font-medium">Why Mental Math?</h1>
