@@ -1,0 +1,10 @@
+0 -> addition
+1 -> subtraction
+2 -> 1 - 2 multiplication
+3 -> 2 multiplication
+4 -> 2 - 3 multiplication
+5 -> 3 multiplication
+6 -> 2 squares
+7 -> 3 squares
+8 -> perfect root
+9 -> non perfect root

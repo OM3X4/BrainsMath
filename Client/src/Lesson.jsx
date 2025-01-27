@@ -22,15 +22,11 @@ function Lesson() {
     useEffect(() => {
         setCurrentLessonIndex(parseInt(search.get("index")))
         setLesson(Data[parseInt(search.get("index"))])
-    } , [])
-
-    useEffect(() => {
         const i = location.state;
         if(i){
             setLesson(Data[location.state.index]);
         }
-    } , []);
-
+    } , [])
 
 
     function handleClick(answer , result , next){
@@ -79,9 +75,9 @@ function Lesson() {
                 <div className='flex items-center justify-center flex-wrap gap-5'>
                     {
                         lesson.content[currentContent].answer?
-                        lesson.content[currentContent].answer.choices.map((choice) => {
+                        lesson.content[currentContent].answer.choices.map((choice , i) => {
                             return(
-                                <div className='text-center mt-10 bg-green py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'
+                                <div key={i} className='text-center mt-10 bg-green py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'
                                 onClick={e => handleClick(choice , lesson.content[currentContent].answer.answer)}>
                                     {choice}
                                 </div>
@@ -103,13 +99,13 @@ function Lesson() {
             :""}
         </div> : ""}
         {isWrongAnswer?
-        <div class="animate-slideDown absolute right-10 top-10 w-1/4 mx-auto flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <div className="animate-slideDown absolute right-10 top-10 w-1/4 mx-auto flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+            <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
-            <span class="sr-only">Info</span>
+            <span className="sr-only">Info</span>
             <div>
-                <span class="font-medium">Wrong Answer!</span> Try Again
+                <span className="font-medium">Wrong Answer!</span> Try Again
             </div>
         </div>: ""}
         {isCorrectAnswer?

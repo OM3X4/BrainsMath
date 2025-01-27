@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Data } from "./assets/Collary";
 import { AiFillGithub } from "react-icons/ai"; 
 import { AiFillYoutube } from "react-icons/ai"; 
 import { BsFacebook } from "react-icons/bs"; 
@@ -10,12 +11,30 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import React , {useState , useEffect} from 'react';
-import { Link } from "react-router";
+import { Link , useNavigate } from "react-router";
 
 
 function Home() {
 
 
+    const navigate = useNavigate();
+
+    function handleStart()
+    {
+        let storage = localStorage.getItem("progress");
+        console.log("omar")
+        if(storage)
+        {
+            let lesson = Data[parseInt(storage)];
+            if(lesson.type == "practice"){
+                navigate(`/practice?index=${storage}`);
+            }else{
+                navigate(`/lesson?index=${storage}`);
+            }
+        }else{
+            navigate(`lesson?index=0`)
+        }
+    }
 
 
     const [operation , setOperation] = useState(3);
@@ -57,23 +76,13 @@ function Home() {
 
     return (
     <>
-        {/* <nav className=' flex items-center justify-between px-32 flex-row h-20'>
-            <div className=' flex items-center justify-between w-11/12'>
-                <h1 className='text-4xl font-bold text-navy cursor-pointer'>BrainsMath</h1>
-                <div className='flex items-center justify-center gap-5'>
-                    <h5 className='cursor-pointer'>Get Started</h5>
-                    <h5 className='cursor-pointer'>Practice</h5>
-                </div>
-            </div>
-            <div className='cursor-pointer bg-navy text-xl ml-16 rounded-2xl px-4 py-2 text-white font-medium hover:bg-black transition-all'>Login</div>
-        </nav> */}
         <section className=' flex items-center justify-center flex-col p' data-aos="fade-up">
             <div className=' flex items-center justify-center flex-col'>
                 <h1 className='text-navy text-[9rem] text-wrap font-bold font-Mono'>Learn</h1>
                 <h1 className='text-navy text-[9rem] text-wrap font-bold font-Mono'>Mental Math</h1>
             </div>
             <p className=' text-xl text-gray'>Speed, Accuracy, and Confidence in Every Calculation!</p>
-            <Link to={"/lesson?index=0"}><div className=' mt-10 bg-navy py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'>Get Started</div></Link>
+            <div className=' mt-10 bg-navy py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button' onClick={handleStart}>Get Started</div>
         </section>
         <section className=" bg-[url('../public/GeometricLightNavy.png')] bg-navy pb-10 bg-contain brightness-90 mt-20 flex items-center justify-center flex-col pt-10">
             <h1 className="font-Mono text-6xl text-white font-medium">Why Mental Math?</h1>
