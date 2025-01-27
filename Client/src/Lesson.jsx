@@ -5,6 +5,11 @@ import { Link, useLocation , useNavigate , useSearchParams } from 'react-router'
 
 function Lesson() {
 
+    const errorSound = new Audio("../src/assets/Error.mp3")
+    const correctSound = new Audio("../src/assets/Correct.mp3")
+    const correctSound2 = new Audio("../src/assets/Correct2.mp3")
+
+
     const [lesson , setLesson] = useState(Data[0]);
     const [currentContent , setCurrentContent] = useState(0);
     const [isWrongAnswer , setIsWrongAnswer] = useState(false);
@@ -31,6 +36,7 @@ function Lesson() {
 
     function handleClick(answer , result , next){
         if(answer == result){
+            correctSound.play();
             if(currentContent < lesson.content.length - 1){
                 if(next){
                     setCurrentContent(c => c + 1);
@@ -43,14 +49,18 @@ function Lesson() {
                 }
             }else{
                 if(Data.length > currentLessonIndex + 1){
+                    correctSound2.play();
                     if(Data[currentLessonIndex + 1].type == "lesson"){
                         navigate("/lessonfinisher" , {state: {link: `/lesson?index=${currentLessonIndex + 1}`}})
                     }else{
                         navigate("/lessonfinisher" , {state: {link: `/practice?index=${currentLessonIndex + 1}`}})
                     }
+                    let LastProgress = parseInt(localStorage.getItem("progress"));
+                    localStorage.setItem("progress" , LastProgress + 1 || 0)
                 }
             }
         }else{
+            errorSound.play();
             setIsWrongAnswer(true)
             setTimeout(() => {
                 setIsWrongAnswer(false)
@@ -109,7 +119,7 @@ function Lesson() {
             </div>
         </div>: ""}
         {isCorrectAnswer?
-        <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-emerald-600  border border-emerald-300 rounded-lg" role="alert">            
+            <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-green  border border-green rounded-lg" role="alert">            
             <div className='flex items-center justify-center'>
                 <svg className="flex-shrink-0 inline w-7 h-7 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>

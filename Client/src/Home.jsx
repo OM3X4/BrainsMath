@@ -22,7 +22,6 @@ function Home() {
     function handleStart()
     {
         let storage = localStorage.getItem("progress");
-        console.log("omar")
         if(storage)
         {
             let lesson = Data[parseInt(storage)];
@@ -33,6 +32,7 @@ function Home() {
             }
         }else{
             navigate(`lesson?index=0`)
+            localStorage.setItem("progress" , 0)
         }
     }
 

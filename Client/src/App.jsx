@@ -15,9 +15,6 @@ import { useNavigate } from 'react-router'
 
 function App() {
 
-  useEffect(() => {
-    localStorage.setItem("progress" , 3)
-  })
 
 
   const navigate = useNavigate();

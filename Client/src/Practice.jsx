@@ -3,17 +3,21 @@ import React , { useState , useEffect} from 'react';
 import { Data } from './assets/Collary';
 import { useNavigate , useLocation , useSearchParams } from 'react-router';
 
-const saveProgress = () => {
+const saveProgress = (collectedData) => {
     try {
-      const existingData = JSON.parse(localStorage.getItem("collectedData") || "[]");
-      const mergedData = [...existingData, ...collectedData];
-      localStorage.setItem("collectedData", JSON.stringify(mergedData));
+        const existingData = JSON.parse(localStorage.getItem("collectedData") || "[]");
+        const mergedData = [...existingData, ...collectedData];
+        localStorage.setItem("collectedData", JSON.stringify(mergedData));
     } catch (error) {
-      console.error("Failed to save progress:", error);
+        console.error("Failed to save progress:", error);
     }
   };
 
 function Practice() {
+
+    const errorSound = new Audio("../src/assets/Error.mp3")
+    const correctSound = new Audio("../src/assets/Correct.mp3")
+    const correctSound2 = new Audio("../src/assets/Correct2.mp3")
 
 
     const [currentLessonIndex , setCurrentLessonIndex] = useState(null)
@@ -53,6 +57,7 @@ function Practice() {
 
     function handleClick(choice , answer){
         if(answer == choice){
+            correctSound.play()
             if(lesson.content.length - 1 > currentContent){
                 const endTime = performance.now()
                 setCollectedData(prev => [...prev , {question:lesson.content[currentContent] , takenTime:(endTime - startTime) , date:new Date(Date.now()) , type:lesson.content[currentContent] , isRight:true}])
@@ -64,16 +69,21 @@ function Practice() {
                 } , 1000)
             }else{
                 if(Data.length > currentLessonIndex + 1){
-                    saveProgress();
+                    saveProgress(collectedData);
 
                     if(Data[currentLessonIndex + 1].type == "practice"){
                         setCurrentLessonIndex(prev => prev + 1);
+                        let LastProgress = parseInt(localStorage.getItem("progress"));
+                        localStorage.setItem("progress" , LastProgress + 1 || 0);
                     }else{
                         navigate(`/lesson?index=${currentLessonIndex + 1}`)
+                        let LastProgress = parseInt(localStorage.getItem("progress"));
+                        localStorage.setItem("progress" , LastProgress + 1 || 0);
                     }
                 }
             }
         }else if(currentContent < lesson.content.length - 1){
+            errorSound.play()
             const temp = lesson.content[currentContent];
 
             const endTime = performance.now()
@@ -97,6 +107,8 @@ function Practice() {
             } , 500)
 
         }else{
+            correctSound2.play()
+            let endTime = performance.now();
             setCollectedData(prev => [...prev , {question:lesson.content[currentContent] , takenTime:(endTime - startTime) , date:new Date(Date.now()) , type:lesson.content[currentContent] , isRight:false}])
             if(Data.length > currentLessonIndex + 1){
                 if(Data[currentLessonIndex + 1].type == "practice"){
@@ -157,7 +169,7 @@ function Practice() {
             </div>
         </div>: ""}
         {isCorrectAnswer?
-        <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-emerald-600  border border-emerald-300 rounded-lg" role="alert">            
+        <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-green  border border-green rounded-lg" role="alert">            
             <div className='flex items-center justify-center'>
                 <svg className="flex-shrink-0 inline w-7 h-7 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
