@@ -24,7 +24,6 @@ function App() {
   function handleStart()
   {
     let storage = localStorage.getItem("progress");
-    console.log("omar")
     if(storage)
     {
         let lesson = Data[parseInt(storage)];

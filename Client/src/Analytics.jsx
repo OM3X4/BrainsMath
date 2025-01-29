@@ -21,7 +21,6 @@ function Analytics() {
         {
             setStored(JSON.parse(data));
         }
-        console.log(JSON.parse(data))
     } , [])
 
 
@@ -43,7 +42,7 @@ function Analytics() {
 
 
     return (
-    <>   
+    <>
         <div className='flex items-center justify-center flex-col bg-slate-100'>
             <h1 className='mx-auto my-10 text-navy text-8xl font-Mono '>Your Statics</h1>
             <div className='flex items-center justify-center flex-col bg-white w-[70vw] px-20 rounded-3xl py-5 my-5'>
