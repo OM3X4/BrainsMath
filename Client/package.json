@@ -5,11 +5,10 @@
   "type": "module",
   "homepage": "https://brainsmath.netlify.app",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "vitest",
     "lint": "eslint .",
     "preview": "vite preview"
   },
