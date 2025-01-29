@@ -21,6 +21,8 @@ function Practice() {
     const correctSound2 = new Audio("../src/assets/Correct2.mp3")
 
 
+
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [currentLessonIndex, setCurrentLessonIndex] = useState(null)
     const [lesson, setLesson] = useState(null);
     const [currentContent, setCurrentContent] = useState(0);
@@ -56,7 +58,9 @@ function Practice() {
 
 
 
-    function handleClick(choice, answer) {
+    function handleClick(e ,choice, answer) {
+        if (isButtonDisabled) return;
+        setIsButtonDisabled(true);
         if (answer == choice) {
             correctSound.play()
             if (lesson.content.length - 1 > currentContent) {
@@ -67,6 +71,7 @@ function Practice() {
                 setTimeout(() => {
                     setIsCorrectAnswer(false)
                     setCurrentContent(c => c + 1)
+                    setIsButtonDisabled(false)
                 }, 1000)
             } else {
                 if (Data.length > currentLessonIndex + 1) {
@@ -81,6 +86,8 @@ function Practice() {
                         let LastProgress = parseInt(localStorage.getItem("progress"));
                         localStorage.setItem("progress", LastProgress + 1 || 0);
                     }
+                }else{
+                    navigate('/cong')
                 }
             }
         } else if (currentContent < lesson.content.length - 1) {
@@ -105,6 +112,7 @@ function Practice() {
                     type: "practice",
                     content: updatedContent
                 }));
+                setIsButtonDisabled(false)
             }, 500)
 
         } else {
@@ -141,7 +149,7 @@ function Practice() {
                                 lesson.content[currentContent].choices.map((choice, i) => {
                                     return (
                                         <div key={i} className='text-center mt-10 bg-green py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'
-                                            onClick={e => handleClick(choice, lesson.content[currentContent].answer)}>
+                                            onClick={e => handleClick(e , choice, lesson.content[currentContent].answer)}>
                                             {choice}
                                         </div>
                                     )

@@ -10,30 +10,66 @@ const renderTextWithBold = (text) => {
 
     // Process each paragraph
     return paragraphs.map((paragraph, paragraphIndex) => {
-      // Split each paragraph by ** for bold, * for italic, and _ for underline
-      const parts = paragraph.split(/(\*\*.*?\*\*|\*.*?\*|_.*?_\_)/g);
+        // Split each paragraph by ** for bold, * for italic, and _ for underline
+        const parts = paragraph.split(/(\*\*.*?\*\*|\*.*?\*|_.*?_\_)/g);
 
-      // Process each part of the paragraph
-      const formattedParagraph = parts.map((part, index) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-          // Bold formatting
-          return <strong key={`${paragraphIndex}-${index}`}>{part.slice(2, -2)}</strong>;
-        } else if (part.startsWith('*') && part.endsWith('*')) {
-          // Italic formatting
-          return <em key={`${paragraphIndex}-${index}`}>{part.slice(1, -1)}</em>;
-        } else if (part.startsWith('_') && part.endsWith('_')) {
-          // Underline formatting
-          return <u key={`${paragraphIndex}-${index}`}>{part.slice(1, -1)}</u>;
-        } else {
-          // Regular text
-          return part;
-        }
-      });
+        // Process each part of the paragraph
+        const formattedParagraph = parts.map((part, index) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+                // Bold formatting
+                return <strong key={`${paragraphIndex}-${index}`}>{part.slice(2, -2)}</strong>;
+            } else if (part.startsWith('*') && part.endsWith('*')) {
+                // Italic formatting
+                return <em key={`${paragraphIndex}-${index}`}>{part.slice(1, -1)}</em>;
+            } else if (part.startsWith('_') && part.endsWith('_')) {
+                // Underline formatting
+                return <u key={`${paragraphIndex}-${index}`}>{part.slice(1, -1)}</u>;
+            } else {
+                // Regular text
+                return part;
+            }
+        });
 
-      // Join the parts and return the formatted paragraph wrapped in a <p> tag
-      return <p key={paragraphIndex}>{formattedParagraph}</p>;
+        // Join the parts and return the formatted paragraph wrapped in a <p> tag
+        return <p key={paragraphIndex}>{formattedParagraph}</p>;
     });
 };
+
+
+const HighlightText = (text) => {
+    // Split the text by ** or -- to identify the parts to highlight
+    const parts = text.split(/(\*\*.*?\*\*|--.*?--)/g);
+
+    return (
+        <div>
+            {parts.map((part, index) => {
+                // Check if the part is wrapped in **
+                if (part.startsWith("**") && part.endsWith("**")) {
+                    // Remove the ** and wrap the content in a span
+                    const content = part.slice(2, -2);
+                    return (
+                        <span key={index} className="text-green font-black">
+                            {content}
+                        </span>
+                    );
+                }
+                // Check if the part is wrapped in --
+                else if (part.startsWith("--") && part.endsWith("--")) {
+                    // Remove the -- and wrap the content in a span
+                    const content = part.slice(2, -2);
+                    return (
+                        <span key={index} className="text-red-900 font-italic line-through decoration-8 decoration-black">
+                            {content}
+                        </span>
+                    );
+                }
+                // Return the normal text
+                return part;
+            })}
+        </div>
+    );
+};
+
 
 
 function Lesson() {
@@ -90,6 +126,8 @@ function Lesson() {
                     }
                     let LastProgress = parseInt(localStorage.getItem("progress"));
                     localStorage.setItem("progress", LastProgress + 1 || 0)
+                }else{
+                    navigate('/cong')
                 }
             }
         } else {
@@ -108,7 +146,7 @@ function Lesson() {
                 <div>
                     {/* numbers */}
                     <div className=' text-8xl mb-10 font-bold text-navy text-center'>
-                        {lesson.content[currentContent].numbers}
+                        {HighlightText(lesson.content[currentContent].numbers)}
                     </div>
                     {/* main text */}
                     <div className={`max-w-[80%] mx-auto text-wrap text-center text-gray ${lesson.content[currentContent].numbers.length ? "text-2xl" : "text-5xl"}  `}>
@@ -135,9 +173,9 @@ function Lesson() {
                 </div>
                 {/* Draft */}
                 {lesson.content[currentContent].draft ?
-                    <div className='border-2 border-black p-5 rounded-2xl flex justify-center items-center flex-col absolute right-10'>
+                    <div className='z-50 border-2 border-black p-5 rounded-2xl flex justify-center items-center flex-col absolute right-10 text-wrap max-w-[10%]'>
                         <h1 className='text-2xl text-navy'>Draft</h1>
-                        {lesson.content[currentContent].draft}
+                        {HighlightText(lesson.content[currentContent].draft)}
                     </div>
                     : ""}
             </div> : ""}

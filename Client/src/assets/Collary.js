@@ -773,6 +773,118 @@ export const Data = [
     ],
     type:"lesson"
   },
+  {
+    "content": [
+      {
+        "question": "12²",
+        "choices": ["144", "148", "140", "136"].sort(() => Math.random() - 0.5),
+        "answer": "144",
+        "type": 6
+      },
+      {
+        "question": "23²",
+        "choices": ["529", "530", "525", "520"].sort(() => Math.random() - 0.5),
+        "answer": "529",
+        "type": 6
+      },
+      {
+        "question": "34²",
+        "choices": ["1156", "1160", "1150", "1140"].sort(() => Math.random() - 0.5),
+        "answer": "1156",
+        "type": 6
+      },
+      {
+        "question": "45²",
+        "choices": ["2025", "2030", "2015", "2005"].sort(() => Math.random() - 0.5),
+        "answer": "2025",
+        "type": 6
+      },
+      {
+        "question": "56²",
+        "choices": ["3136", "3140", "3125", "3130"].sort(() => Math.random() - 0.5),
+        "answer": "3136",
+        "type": 6
+      },
+      {
+        "question": "67²",
+        "choices": ["4489", "4490", "4480", "4475"].sort(() => Math.random() - 0.5),
+        "answer": "4489",
+        "type": 6
+      },
+      {
+        "question": "78²",
+        "choices": ["6084", "6090", "6075", "6080"].sort(() => Math.random() - 0.5),
+        "answer": "6084",
+        "type": 6
+      },
+      {
+        "question": "89²",
+        "choices": ["7921", "7930", "7915", "7925"].sort(() => Math.random() - 0.5),
+        "answer": "7921",
+        "type": 6
+      },
+      {
+        "question": "14²",
+        "choices": ["196", "200", "195", "190"].sort(() => Math.random() - 0.5),
+        "answer": "196",
+        "type": 6
+      },
+      {
+        "question": "25²",
+        "choices": ["625", "630", "620", "615"].sort(() => Math.random() - 0.5),
+        "answer": "625",
+        "type": 6
+      },
+      {
+        "question": "36²",
+        "choices": ["1296", "1300", "1290", "1285"].sort(() => Math.random() - 0.5),
+        "answer": "1296",
+        "type": 6
+      },
+      {
+        "question": "47²",
+        "choices": ["2209", "2210", "2205", "2200"].sort(() => Math.random() - 0.5),
+        "answer": "2209",
+        "type": 6
+      },
+      {
+        "question": "58²",
+        "choices": ["3364", "3370", "3355", "3360"].sort(() => Math.random() - 0.5),
+        "answer": "3364",
+        "type": 6
+      },
+      {
+        "question": "69²",
+        "choices": ["4761", "4770", "4755", "4765"].sort(() => Math.random() - 0.5),
+        "answer": "4761",
+        "type": 6
+      },
+      {
+        "question": "72²",
+        "choices": ["5184", "5190", "5175", "5180"].sort(() => Math.random() - 0.5),
+        "answer": "5184",
+        "type": 6
+      }
+    ],
+    "type": "practice"
+  },
+  // lesson 10 rooting perfect squares
+  {
+    "content": [
+      { "numbers": "", "text": "This trick will help you quickly find the square root of **perfect squares**." },
+      { "numbers": "", "text": "The more squares you memorize, the wider the range of perfect squares you can root effortlessly." },
+      { "numbers": "√3364", "text": "To determine the square root of this perfect square, you need to memorize the squares of numbers from 1 to 10.", "draft": "1² = 1, 2² = 4, 3² = 9, 4² = 16, 5² = 25, 6² = 36, 7² = 49, 8² = 64, 9² = 81, 0² = 0" },
+      { "numbers": "√336**4**", "text": "Look at the last digit (4) and compare it with the table to find the numbers whose squares end in the same digit.", "draft": "1² = 1, **2² = 4**, 3² = 9, 4² = 16, 5² = 25, 6² = 36, 7² = 49, **8² = 64**, 9² = 81, 0² = 0" },
+      { "numbers": "√33(2/8)", "text": "Replace the last two digits (64) with one of the two numbers whose squares end in 4 (2 or 8)." },
+      { "numbers": "√**33**(2/8)", "text": "Now, focus on the remaining number (33) and find the largest perfect square less than or equal to it, which is **25**. The square root of 25 is **5**." },
+      { "numbers": "√**33**(2/8)", "text": "Multiply this root (5) by the next number (6). If the result (30) is **less than** 33, choose the **larger digit** from (2, 8). Otherwise, take the **smaller digit**." },
+      { "numbers": "√3364 = (5)(8)", "text": "Since 5 × 6 = 30 is less than 33, we choose 8. Combining this with 5 gives us **58** as the final answer." }
+    ],
+    "type": "lesson"
+  },
+
+
+
 
 
 

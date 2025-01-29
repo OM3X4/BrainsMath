@@ -14,12 +14,15 @@ function Train() {
     const correctSound = new Audio("../src/assets/Correct.mp3")
     const correctSound2 = new Audio("../src/assets/Correct2.mp3")
 
+
+
+    const [isButtonDisabled , setIsButtonDisabled] = useState(false)
     const [questions , setQuestions] = useState(null)
     const [currentContent , setCurrentContent] = useState(0);
     const [isWrongAnswer , setIsWrongAnswer] = useState(false);
     const [progress , setProgress] = useState(0);
     const [isCorrectAnswer , setIsCorrectAnswer] = useState(false);
-    
+
     const [startTime , setStartTime] = useState(performance.now());
     const [collectedData , setCollectedData] = useState([]);
 
@@ -48,7 +51,7 @@ function Train() {
             quizs = quizs.sort(() =>  Math.random() - 0.5);
             quizs = quizs.slice(0 , 5);
             setQuestions(quizs);
-        }else{            
+        }else{
             let quizs = bank[parseInt(search.get("type"))];
             quizs = quizs.sort(() =>  Math.random() - 0.5);
             quizs = quizs.slice(0 , 5);
@@ -65,9 +68,11 @@ function Train() {
 
 
 
-    
+
 
     function handleClick(choice , answer){
+        if(isButtonDisabled) return;
+        setIsButtonDisabled(true);
         if(answer == choice){
             if(questions.length - 1 > currentContent){
                 const endTime = performance.now()
@@ -78,7 +83,11 @@ function Train() {
                 setTimeout(() => {
                     setIsCorrectAnswer(false)
                     setCurrentContent(c => c + 1)
+                    setIsButtonDisabled(false)
                 } , 1000)
+                setTimeout(() => {
+                    setIsButtonDisabled(false)
+                })
             }else{
                 saveProgress();
                 navigate("/trainingfinisher" , { state: {link: `${location.pathname}${location.search}`}})
@@ -105,6 +114,9 @@ function Train() {
                     updatedContent
                 ));
             } , 500)
+            setTimeout(() => {
+                setIsButtonDisabled(false)
+            } , 1500)
 
         }else{
             correctSound2.play();
@@ -114,7 +126,7 @@ function Train() {
             navigate("/trainingfinisher" , { state: {link: `${location.pathname}${location.search}`}})
         }
     }
-    
+
 
 
     return (
@@ -164,7 +176,7 @@ function Train() {
             </div>
         </div>: ""}
         {isCorrectAnswer?
-        <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-emerald-600  border border-green rounded-lg" role="alert">            
+        <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-emerald-600  border border-green rounded-lg" role="alert">
             <div className='flex items-center justify-center'>
                 <svg className="flex-shrink-0 inline w-7 h-7 me-3 text-green" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>

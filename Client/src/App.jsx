@@ -10,6 +10,7 @@ import Analytics from './Analytics'
 import Train from './Train'
 import TrainFinisher from './trainingFinisher'
 import { useNavigate } from 'react-router'
+import Congratulation from './Congratulation'
 
 
 
@@ -61,6 +62,7 @@ function App() {
           <Route path='/lessonfinisher' element={<LessonFinisher />}/>
           <Route path='/trainingfinisher' element={<TrainFinisher />}/>
           <Route path='/analyze' element={<Analytics />}/>
+          <Route path='/cong' element={<Congratulation/>} />
         </Routes>
       </div>
     </>
