@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Data } from './assets/Collary';
 import { useNavigate, useLocation, useSearchParams } from 'react-router';
+import { Helmet } from "react-helmet";
+
 
 const saveProgress = (collectedData) => {
     try {

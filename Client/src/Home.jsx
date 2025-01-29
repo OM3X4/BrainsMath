@@ -12,6 +12,7 @@ import 'aos/dist/aos.css';
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 
 function Home() {

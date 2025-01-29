@@ -4,6 +4,8 @@ import { Data } from './assets/Collary';
 import { bank } from './assets/bank';
 import { useNavigate , useLocation , useSearchParams } from 'react-router';
 import "../src/assets/Error.mp3"
+import { Helmet } from "react-helmet";
+
 
 
 
