@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { Data } from "./assets/Collary";
-import { AiFillGithub } from "react-icons/ai"; 
-import { AiFillYoutube } from "react-icons/ai"; 
-import { BsFacebook } from "react-icons/bs"; 
+import { AiFillGithub } from "react-icons/ai";
+import { AiFillYoutube } from "react-icons/ai";
+import { BsFacebook } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaChartPie } from "react-icons/fa"; 
-import { FaLightbulb } from "react-icons/fa"; 
+import { FaChartPie } from "react-icons/fa";
+import { FaLightbulb } from "react-icons/fa";
 import { MdOutlineCenterFocusStrong } from "react-icons/md";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -104,7 +104,7 @@ function Home() {
         <section className="pt-10 flex items-center justify-center flex-col">
             <h1 className="text-navy text-7xl font-bold ">What Will You Learn?</h1>
             <div className="flex items- justify-center mt-20">
-                <div className="w-1/3  mr-20"><img src="../public/Brain3.png" alt="" className=""/></div>
+                <div className="w-1/3  mr-20"><img src="/Brain3.png" alt="" className=""/></div>
                 <div className="w-2/3">
                     <div className="flex items-center justify-around text-xl text-white bg-lightNavy mb-10 rounded-full py-5">
                         <h1 className={`${operation === 0 ? "bg-navy" : ""} rounded-full px-5 py-3 transition-all hover:bg-black cursor-pointer`} onClick={e => setOperation(0)}>Addition</h1>
@@ -130,7 +130,7 @@ function Home() {
                 <h1 className="text-7xl text-center font-semibold text-navy">Practice Makes Perfect</h1>
                 <p className="text-xl">We Have Tons Of Practice Inside</p>
             </div>
-            <img src="../public/Arrows.png" alt="" className="w-2/3 "/>
+            <img src="/Arrows.png" alt="" className="w-2/3 "/>
         </section>
         <footer className="flex items-center justify-center bg-gray text-white h-16 text-xl gap-5">
             <BsFacebook className="cursor-pointer"/>
