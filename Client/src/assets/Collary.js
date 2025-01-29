@@ -20,7 +20,7 @@ export const Data = [
         numbers: "123 + 80",
         text: "So 78 will become 80 then what is 123 + 80",
         answer: { choices: ["200", "210", "203", "199"].sort(() => Math.random() - 0.5), answer: "203" },
-        draft: -2,
+        draft: "-2",
       },
       {
         numbers: "203 - 2",
