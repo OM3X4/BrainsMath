@@ -133,6 +133,29 @@ function Practice() {
 
     return (
         <>
+        <Helmet>
+            <meta name="google-site-verification" content="FOpOxcY4cdYAblOfATnThANqE6F9SeY1NSiaV2yNxkI" />
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-7CCREKK12C"></script>
+
+            <meta charset="UTF-8" />
+            <meta name="description" content="BrainsMath is a free platform designed to teach and practice mental math. Learn powerful tricks to quickly solve complex math problems and boost your calculation speed with engaging exercises." />
+            <meta name="author" content="BrainsMath Team" />
+            <meta name="robots" content="index, follow" />
+            <meta name="keywords" content="mental math, math tricks, free math learning, math practice, learn math fast, speed math, brain training, math exercises" />
+
+            <meta property="og:title" content="BrainsMath - Learn Mental Math Faster and Smarter" />
+            <meta property="og:description" content="Master mental math with BrainsMath. Learn quick calculation tricks and practice solving problems efficiently. Free for everyone!" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.brainsmath.com" />
+            <meta property="og:image" content="https://www.brainsmath.com/images/og-image.jpg" />
+            <meta property="og:image:alt" content="BrainsMath Logo or Math-related Image" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="BrainsMath - Learn Mental Math" />
+            <meta name="twitter:description" content="Get faster at math with BrainsMath. Free lessons and practice for improving mental math skills!" />
+            <meta name="twitter:image" content="https://www.brainsmath.com/images/twitter-image.jpg" />
+            <meta name="twitter:image:alt" content="BrainsMath Logo or Math-related Image" />
+        </Helmet>
             {lesson ? <main className={`flex items-center justify-center h-[calc(80vh-5rem)]`}>
                 <div className="w-6/12 bg-slate-400 rounded-full h-4 dark:bg-gray-700 absolute top-20">
                     <div className="bg-green h-4 rounded-full transition-all" style={{ width: `${progress}%` }}></div>
