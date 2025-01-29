@@ -10,9 +10,9 @@ import "../src/assets/Error.mp3"
 
 function Train() {
 
-    const errorSound = new Audio("../src/assets/Error.mp3")
-    const correctSound = new Audio("../src/assets/Correct.mp3")
-    const correctSound2 = new Audio("../src/assets/Correct2.mp3")
+    const errorSound = new Audio("/Error.mp3")
+    const correctSound = new Audio("/Correct.mp3")
+    const correctSound2 = new Audio("/Correct2.mp3")
 
 
 
