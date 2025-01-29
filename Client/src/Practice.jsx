@@ -133,7 +133,7 @@ function Practice() {
 
     return (
         <>
-            {lesson ? <div className={`flex items-center justify-center h-[calc(80vh-5rem)]`}>
+            {lesson ? <main className={`flex items-center justify-center h-[calc(80vh-5rem)]`}>
                 <div className="w-6/12 bg-slate-400 rounded-full h-4 dark:bg-gray-700 absolute top-20">
                     <div className="bg-green h-4 rounded-full transition-all" style={{ width: `${progress}%` }}></div>
                 </div>
@@ -143,15 +143,15 @@ function Practice() {
                         {lesson.content[currentContent].question}
                     </div>
                     {/* choice */}
-                    <div className='flex items-center justify-center flex-wrap gap-5'>
+                    <ul className='flex items-center justify-center flex-wrap gap-5'>
                         {
                             lesson.content[currentContent].choices ?
                                 lesson.content[currentContent].choices.map((choice, i) => {
                                     return (
-                                        <div key={i} className='text-center mt-10 bg-green py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'
+                                        <li key={i} className='text-center mt-10 bg-green py-5 px-12 text-white rounded-2xl text-4xl shadow-[4px_4px_0_rgb(60,100,180)] transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button'
                                             onClick={e => handleClick(e , choice, lesson.content[currentContent].answer)}>
                                             {choice}
-                                        </div>
+                                        </li>
                                     )
                                 })
                                 :
@@ -159,9 +159,9 @@ function Practice() {
                                     Next
                                 </div>
                         }
-                    </div>
+                    </ul>
                 </div>
-            </div>
+            </main>
                 : ""}
             {isWrongAnswer ?
                 <div className=" absolute bottom-10 w-1/4 left-1/2 -translate-x-1/2 flex items-center justify-center flex-col gap-5 p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">            <div className='flex items-center justify-center'>

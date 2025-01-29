@@ -23,13 +23,19 @@
   animation: shimmer 2s linear infinite;
 }
 
+.button {
+  @apply mt-10 bg-navy py-5 px-12 text-white rounded-2xl
+  text-4xl shadow-[4px_4px_0_rgb(60,100,180)]
+  transition-all duration-150 hover:bg-lightNavy cursor-pointer coin-button
+}
+
 
 @keyframes slideContent {
   0% {
     opacity: 0;
     transform: translateX(100%);
   }
-  
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -41,7 +47,7 @@
     opacity: 1;
     transform: translateX(0);
   }
-  
+
   100% {
     opacity: 0;
     transform: translateX(-100%);
